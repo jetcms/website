@@ -13,7 +13,7 @@
         "php": ">=5.5.9",
         "intervention/image": "^2.2",
         "mews/purifier": "~2.0",
-        "soapbox/laravel-formatter": "dev-master",
+        "soapbox/laravel-formatter": "2.0",
         "roumen/sitemap": "v2.5.6",
         "roumen/feed": "v2.9.3"
     },
