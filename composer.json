@@ -15,7 +15,8 @@
         "mews/purifier": "~2.0",
         "soapbox/laravel-formatter": "2.0",
         "roumen/sitemap": "v2.5.6",
-        "roumen/feed": "v2.9.3"
+        "roumen/feed": "v2.9.3",
+        "jetcms/models": "dev-master"
     },
     "require-dev": {
 
