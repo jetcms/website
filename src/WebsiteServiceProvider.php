@@ -17,9 +17,8 @@ class WebsiteServiceProvider extends ServiceProvider {
                 __DIR__.'/../resources' => base_path('resources')
             ]);
 			
-		
-		include __DIR__.'/../routes.php';
-		include __DIR__.'/../viewComposers.php';
+			include __DIR__.'/../routes.php';
+			include __DIR__.'/../helpers.php';
 	}
         // ---
 	/**

@@ -1,47 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
+@extends('jetweb::layouts.master')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('title')
+    <title>503</title>
+@stop
 
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
+@section('body')
+    <div class="container">
+        <div class="row">
+            <div class="col-.md-12 text-center">
+                <h1 class="text-danger">503</h1>
+                <div>
+                    <a href="/">Вернутся на главную</a>
+                </div>
+                <div>
+                    <a href="{{ URL::previous() }}">Вернутся назад</a>
+                </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+    <br /><br /><br /><br /><br />
+@stop
+
