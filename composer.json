@@ -11,8 +11,11 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "baum/baum": "~1.1",
-	"jetcms/models": "dev-master"
+        "intervention/image": "^2.2",
+        "mews/purifier": "~2.0",
+        "soapbox/laravel-formatter": "dev-master",
+        "roumen/sitemap": "v2.5.6",
+        "roumen/feed": "v2.9.3"
     },
     "require-dev": {
 
