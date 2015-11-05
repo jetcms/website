@@ -25,6 +25,5 @@
         "psr-4": {
             "JetCMS\\Website\\": "src/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
