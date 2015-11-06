@@ -10,6 +10,7 @@ use App\Menu;
 class PageController extends Controller
 {
     Public $defaultTplPage = 'tpl.main';
+    protected $template = null;
 
     Public function pageModel($context,$alias)
     {
@@ -39,21 +40,52 @@ class PageController extends Controller
         }
     }
 
-
-    /*
-    protected function view ($page,$value)
+    public function __call($method, $parameters)
     {
-        if (!$page)
-        {
-            return $this->notFoundPage();
+        if (str_is('show*', $method)){
+            $alias = mb_strtolower(substr($method,4));
+            return $this->pageCreateView($this->context,$alias);
         }
-
-        if (view()->exists('tpl.' . $page->template))
-        {
-            return view('tpl.' . $page->template, $value);
-        }
-        return view('tpl.main', $value);
+        throw new BadMethodCallException("Method [$method] does not exist.");
     }
-*/
 
+
+    Public function pageCreateView($context,$alias){
+
+        $menuLevel = [];
+        $page = $this->pageModel($context,$alias);
+
+        $value = [
+            'page' => $page,
+
+        ];
+        if ($page->context == 'post') {
+            $value['comments'] = $page->comments;
+        }
+
+        if ($page->menu) {
+            $page->menu->setActiveThis();
+            $menuLevel = $page->menu->getMapLevel(true);
+
+            if($this->list) {
+                $childs = $page->menu->getChildsId(true);
+                $list = Page::active()
+                    ->where('context', $this->list)
+                    ->whereIn('menu_id', $childs)
+                    ->with('user')
+                    ->paginate(15);
+                $value['list'] = $list;
+            }
+        }
+
+        foreach ($menuLevel as $key=>$val){
+            $value['menu_level_'.$key] = $val;
+        }
+
+        if($this->template) {
+            return $this->view($this->template, $value);
+        }else{
+            return $this->view($page->template, $value);
+        }
+    }
 }
