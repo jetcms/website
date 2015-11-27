@@ -59,7 +59,11 @@ class PageController extends Controller
             'page' => $page,
 
         ];
+<<<<<<< HEAD
         if ($page->comments) {
+=======
+        if ($page->context == 'post') {
+>>>>>>> c17402debb4e069f358c28241dfff9332a0eb7b0
             $value['comments'] = $page->comments;
         }
 
@@ -72,7 +76,11 @@ class PageController extends Controller
                 $list = Page::active()
                     ->where('context', $this->list)
                     ->whereIn('menu_id', $childs)
+<<<<<<< HEAD
                     ->with('user','fields')
+=======
+                    ->with('user')
+>>>>>>> c17402debb4e069f358c28241dfff9332a0eb7b0
                     ->paginate(15);
                 $value['list'] = $list;
             }
@@ -85,7 +93,11 @@ class PageController extends Controller
         if($this->template) {
             return $this->view($this->template, $value);
         }else{
+<<<<<<< HEAD
             return $this->view('tpl.'.$page->template, $value);
+=======
+            return $this->view($page->template, $value);
+>>>>>>> c17402debb4e069f358c28241dfff9332a0eb7b0
         }
     }
 }
