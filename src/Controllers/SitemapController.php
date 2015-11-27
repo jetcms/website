@@ -36,7 +36,7 @@ class SitemapController extends Controller {
     }
 
     Protected function addLoc($arr = []){
-        $pages = $this->getRowl();
+        $pages = $this->getData();
         if ($pages) {
             foreach ($pages as $page) {
                 $arr[$page->url] = [
@@ -49,8 +49,8 @@ class SitemapController extends Controller {
         return $arr;
     }
 
-    Protected function getRowl(){
-        Page::active()->with('user')->get();
+    Protected function getData(){
+        return Page::active()->with('user')->get();
     }
 }
 

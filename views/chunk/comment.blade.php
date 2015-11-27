@@ -38,25 +38,25 @@
         <hr/>
     @endforeach
 
+@endif
 
-    <a name="view-comment-form" class="comment-margin-top"></a>
-    <form role="form" method="POST" action="/comment/add">
-        @if (Input::has('reply'))
-            <small>ответ на <a  href="#comment-{{Input::get('reply')}}">comment-{{Input::get('reply')}}</a></small>
-        @endif
-        <div class="form-group">
+<a name="view-comment-form" class="comment-margin-top"></a>
+<form role="form" method="POST" action="/comment/add">
+    @if (Input::has('reply'))
+        <small>ответ на <a  href="#comment-{{Input::get('reply')}}">comment-{{Input::get('reply')}}</a></small>
+    @endif
+    <div class="form-group">
             <textarea
                     name="comment"
                     rows="10"
                     class="form-control"
                     placeholder="Оставьте свой коментарий здесь"></textarea>
-        </div>
+    </div>
 
-        <input name="reply_id" type="hidden" value="{{Input::get('reply')}}">
-        <input name="_token" type="hidden" value="{{csrf_token()}}">
-        <input name="page_id" type="hidden" value="{{$page->id}}">
-        <input name="url" type="hidden" value="{{Request::url()}}">
+    <input name="reply_id" type="hidden" value="{{Input::get('reply')}}">
+    <input name="_token" type="hidden" value="{{csrf_token()}}">
+    <input name="page_id" type="hidden" value="{{$page->id}}">
+    <input name="url" type="hidden" value="{{Request::url()}}">
 
-        <button type="submit" class="btn btn-default">Коментировать</button>
-    </form>
-@endif
+    <button type="submit" class="btn btn-default">Коментировать</button>
+</form>
