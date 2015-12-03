@@ -58,5 +58,5 @@
     <input name="page_id" type="hidden" value="{{$page->id}}">
     <input name="url" type="hidden" value="{{Request::url()}}">
 
-    <button type="submit" class="btn btn-default">Коментировать</button>
+    <button type="submit" class="btn btn-success">Коментировать</button>
 </form>

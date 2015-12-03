@@ -1,5 +1,5 @@
-<hr/>
 <div class="container">
+    <hr/>
     <div class="row">
         <div class="col-md-12">
             <ul>

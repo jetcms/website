@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-
-
-
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,12 +12,23 @@
   <meta name="robots" content="noodp"/>
   <meta name="descri" content="noodp"/>
 
+  @section('head_og')
+    <meta property="og:title" content="{{$page->title or 'Главная страница'}}" />
+    <meta property="og:description" content="{{$page->description or 'Главная страница'}}" />
+    <meta property="og:url" content="{{$page->description or '/'}}у" />
+    <meta property="og:image" content="{{$page->url or ''}}{{$page->image or ''}}" />
+  @show
+
   @section('head_title')
-    <title>{{$page->title or 'Установка замков в СПБ'}}</title>
+    <title>{{$page->title or 'Главная страница'}}</title>
   @show
 
   @section('head_description')
-    <meta name="description" content="{{$page->description or 'Установка замков в СПБ'}}">
+    <meta name="description" content="{{$page->description or 'Главная страница'}}">
+  @show
+
+  @section('head_image_src')
+    <link rel="image_src" href="{{$page->url or ''}}{{$page->image or ''}}" />
   @show
 
   <link href="/css/app.css" rel="stylesheet">
@@ -41,7 +49,7 @@
 
 @include('jetweb::widgets.topmenu')
 
-@section('body')
+  @section('body')
   <div class="container">
     <div class="row">
       <div class="col-md-2">
@@ -72,19 +80,7 @@
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/js/all.js"></script>
 
-  <script type="text/javascript">
-    $(document).ready(function(){
-      var sh =document.location.host;
-      $('a').on('click', function(){
-        if ($(this).attr('data-away') == undefined) {
-          if (this.host != sh) {
-            this.href = 'http://' + sh + '/away?url=' + this.href;
-          }
-        }
-        return true;
-      });
-    });
-  </script>
+  @include('jetweb::script.main')
 
 </body>
 </html>
