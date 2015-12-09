@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-md-4">
                 @if ($val->image)
-                <div class="thumbnail">
+         s
                         <img
-                                data-src="/{{image_thumb_fit($val->image,200,200)}}"
-                                src="/{{image_thumb_fit($val->image,200,200)}}"
+                                data-src="/{{image_thumb_resize_canvas($val->image,220,176)}}"
+                                src="/{{image_thumb_resize_canvas($val->image,220,176)}}"
                                 alt="{{$val->title}}"
                                 class="img-rounded">
                 </div>
@@ -24,8 +24,8 @@
                                 <p>Автор: <a href="/profile/{{$val->user->id}}">{{$val->user->name}}</a>
 
                                     <img
-                                            data-src="/{{image_thumb_fit($val->user->avatar,40,40)}}"
-                                            src="/{{image_thumb_fit($val->user->avatar,40,40)}}"
+                                            data-src="/{{image_thumb_resize_canvas($val->user->avatar,40,40)}}"
+                                            src="/{{image_thumb_resize_canvas($val->user->avatar,40,40)}}"
                                             alt="{{$val->user->name}}"
                                             class="img-circle">
                                 </p>

@@ -71,6 +71,7 @@ class PageController extends Controller
                 $list = Page::active()
                     ->where('context', $this->list)
                     ->whereIn('menu_id', $childs)
+                    ->sort()
                     ->with('user','fields')
                     ->paginate(15);
                 $value['list'] = $list;

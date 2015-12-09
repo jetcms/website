@@ -77,69 +77,103 @@
 <script src="/bower_components/photoswipe/dist/photoswipe-ui-default.min.js"></script>
 
 <script>
-    var openPhotoSwipe = function(items,index) {
-        var pswpElement = document.querySelectorAll('.pswp')[0];
 
-        // build items array
-        //var items;
 
-        // define options (if needed)
-        var options = {
-            // history & focus options are disabled on CodePen
-            index: index,
-            history: true,
-            focus: true,
-            shareEl: false,
-            fullscreenEl: false,
-            zoomEl :true,
-            bgOpacity: 0.90,
+    var jetPhotoSwipe = function(name) {
 
-            showAnimationDuration: 0,
-            hideAnimationDuration: 0
+        var _initPhotoSwipe = function ( gallery ){
 
-        };
-
-        var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
-
-        gallery.listen('gettingData', function(index, item) {
+            gallery.listen('gettingData', function(index, item) {
                 var img = new Image();
                 img.src = item.src;
                 item.w = img.width;
                 item.h = img.height;
-           });
-        gallery.init();
-    };
-
-    function initPhotoSwipe(name){
-        var images = [];
-        var gallery = document.getElementsByClassName(name);
-
-        var index, len;
-        for (index = 0, len = gallery.length; index < len; ++index) {
-            images.push({src:gallery[index].href});
+            });
+            gallery.init();
         }
+        var openPhotoSwipe = function(items,index) {
+            var pswpElement = document.querySelectorAll('.pswp')[0];
 
-        var index, len;
-        for (index = 0, len = gallery.length; index < len; ++index) {
-            document.getElementsByClassName(name)[index].onclick = function () {
-                /*нужно переписать*/
-                var i;
-                var index2, len2;
-                for (index2 = 0, len2 = gallery.length; index2 < len2; ++index2) {
+            var options = {
+                // history & focus options are disabled on CodePen
+                index: index,
+                history: true,
+                focus: true,
+                shareEl: false,
+                fullscreenEl: false,
+                zoomEl :true,
+                bgOpacity: 0.90,
+                showAnimationDuration: 0,
+                hideAnimationDuration: 0
 
-                    if (gallery[index2].href == this.href){
-                        i = index2;
+            };
+
+            var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+            _initPhotoSwipe(gallery);
+        };
+
+        var initPhotoSwipe = function(name){
+            var images = [];
+            var gallery = document.getElementsByClassName(name);
+
+            var index, len;
+            for (index = 0, len = gallery.length; index < len; ++index) {
+                images.push({src:gallery[index].href});
+            }
+
+            var index, len;
+            for (index = 0, len = gallery.length; index < len; ++index) {
+                document.getElementsByClassName(name)[index].onclick = function () {
+                    var i;
+                    var index2, len2;
+
+                    var complit = 0;
+
+                    var loaded = function(images,i,length) {
+                        complit = complit+1;
+                        if (complit == length) {
+                            openPhotoSwipe(images, i);
+                        }
                     }
+
+                    var loadImage2 = function(images, i,img,length) {
+                        setTimeout(function(){
+                            if (img.complete) {
+                                loaded(images, i,length);
+                            }else {
+                                loadImage2(images, i,img,length);
+                            }
+                        }, 10);
+                    }
+
+                    var loadImage = function(images, i,src,length) {
+                        var img = new Image();
+                        img.src = src;
+
+                        if (img.complete) {
+                            loaded(images, i,length);
+                        }else {
+                            loadImage2(images, i,img,length);
+                        }
+
+                        img.addEventListener('error', function() {
+                            alert('error load img | '+img.src);
+                        });
+                    }
+
+                    for (index2 = 0, len2 = gallery.length; index2 < len2; ++index2) {
+
+                        if (gallery[index2].href == this.href){
+                            i = index2;
+                        }
+                        loadImage(images, i,gallery[index2].href,gallery.length);
+                    }
+                    return false;
                 }
-                /*//*/
-                openPhotoSwipe(images,i);
-                return false;
             }
         }
 
+        initPhotoSwipe(name);
     }
-    /*
-    initPhotoSwipe('pswp__gallery_main');
-    */
 
 </script>

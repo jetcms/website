@@ -35,22 +35,16 @@ if (!function_exists('image_thumb_fit')) {
 
         $pathFile = 'thumb/t'.md5($nameFile).'('.$h.'-'.$w.'-'.$position.'-'.$color.').png';
         if (!file_exists(public_path($pathFile))){
-            if($h>$w){
-                $_w = $w;
-                $_h = null;
-            }else{
-                $_w = null;
-                $_h = $h;
-            }
-            Image::make(public_path($nameFile))
-                ->resize($_w, $_h, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->resizeCanvas($w, $h,$position,false,$color)
-                ->encode('png', 90)
-                ->save(public_path($pathFile),100);
+        Image::make(public_path($nameFile))
+            ->resize($w, $h, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->resizeCanvas($w, $h,$position,false,$color)
+            ->encode('png', 95)
+            ->save(public_path($pathFile),100);
         }
         return $pathFile;
+
     }
 
     function html_minify($view)
