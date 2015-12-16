@@ -16,9 +16,13 @@ class PageController extends Controller
     Public function pageModel($context,$alias)
     {
         if (is_array($alias)){
-            $page = Page::where('context',$context)->whereIn('alias', $alias)->first();
+            $page = Page::where('context',$context)
+                ->whereIn('alias', $alias)
+                ->first();
         }else{
-            $page = Page::where('context',$context)->where('alias', $alias)->first();
+            $page = Page::where('context',$context)
+                ->where('alias', $alias)
+                ->first();
         }
 
         if (!$page) {
@@ -59,6 +63,7 @@ class PageController extends Controller
         $value['page'] = $page;
 
         if ($page->comments) {
+            $page->load('comments', 'comments.user');
             $value['comments'] = $page->comments;
         }
 

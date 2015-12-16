@@ -39,7 +39,7 @@
                 @else
                     <li @if (Request::url() == url('auth/register')) class="active" @endif><a
                                 href="/auth/register">Регистрация</a></li>
-                    <li><a href="/auth/login">Вход</a></li>
+                    <li @if (Request::url() == url('auth/login')) class="active" @endif><a href="/auth/login">Вход</a></li>
                 @endif
             </ul>
         </div><!-- /.navbar-collapse -->

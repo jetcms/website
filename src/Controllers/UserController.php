@@ -1,6 +1,7 @@
 <?php namespace JetCMS\Website\Controllers;
 
 use App;
+use App\User;
 use App\Page;
 use App\Sitemap;
 use App\Http\Controllers\Controller;
@@ -13,7 +14,8 @@ class UserController extends Controller {
     }
 
     public function showProfile($id){
-        return view('user.profile');
+        $user = User::find($id);
+        return view('user.profile',compact('user'));
     }
 
     public function showHome(){

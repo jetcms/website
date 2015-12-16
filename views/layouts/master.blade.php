@@ -54,7 +54,7 @@
     <div class="row">
       <div class="col-md-2">
         @section('body_left')
-          @include('jetweb::chunk.menu')
+            @include('jetweb::chunk.menu')
         @show
       </div>
       <div class="col-md-10">
@@ -79,6 +79,9 @@
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/js/all.js"></script>
+
+  @section('footer_script')
+  @show
 
   @include('jetweb::script.main')
 
