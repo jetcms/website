@@ -44,10 +44,9 @@ class MailController extends Controller {
         }
 
         Request::flashOnly(config('jetcms.form.'.$name.'.flash_only'),config('jetcms.form.'.$name.'.only'));
-        return view(config('jetcms.form.'.$name.'.layouts','form.layouts.master'),[
-            'content'=>view('form.'.$name,[
-                'errors' => $validator->errors()
-            ])
+
+        return view(config('jetcms.form.'.$name.'.tpl','jetweb::form.master'),[
+            'errors' => $validator->errors()
         ]);
     }
 
@@ -58,9 +57,7 @@ class MailController extends Controller {
             return redirect('/form/'.config('jetcms.setting.default_form'));
         }
 
-        return view(config('jetcms.form.'.$name.'.layouts','tpl.form.layouts.master'),[
-            'content'=>view('form.'.$name)
-        ]);
+        return view(config('jetcms.form.'.$name.'.tpl','jetweb::form.master'));
     }
 
     public function anySuccess($name)

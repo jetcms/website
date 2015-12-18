@@ -57,16 +57,22 @@
             @include('jetweb::chunk.menu')
         @show
       </div>
-      <div class="col-md-10">
+      <div class="col-md-9">
         @section('body_center')
 
           @if (isset($page))
             <p>{!!$page->content!!}</p>
             @include('jetweb::chunk.list')
-            @include('jetweb::chunk.comment')
+            @if($view_comments)
+              <p class="h3">Коментарии:</p>
+              <hr/>
+              @include('jetweb::chunk.comment')
+            @endif
           @endif
 
         @show
+      </div>
+      <div class="col-md-1">
       </div>
     </div>
   </div>

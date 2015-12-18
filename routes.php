@@ -15,7 +15,7 @@ Route::any('feed', '\App\Http\Controllers\FeedController@anyGenerate');
 
 Route::get('/away', function ()
 {
-	return view('technical_pages.away');
+	return view('jetweb::technical_pages.away');
 });
 
 Route::get('/lk', [

@@ -17,7 +17,7 @@
             <div class="media-body">
                 <p>{!! $val->content !!}</p>
                 <hr />
-                <h5 class="media-heading"> <small>{{$val->user->name}} | {{$val->updated_at->format('d-m-Y H:i:s')}}</small></h5>
+                <h5 class="media-heading"> <small>{{$val->user->name}} | {{$val->updated_at->diffForHumans()}}</small></h5>
                 @if(Auth::check())
                     @if(Auth::user()->id != $val->user->id)
                     <a href="{{Request::url()}}?reply={{$val->id}}#view-comment-form">Ответить</a>

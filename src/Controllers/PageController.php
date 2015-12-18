@@ -10,8 +10,11 @@ use App\Menu;
 
 class PageController extends Controller
 {
-    Public $defaultTplPage = 'tpl.main';
-    protected $template = null;
+    protected $defaultTplPage = 'tpl.main';
+    protected $view_comments = true;
+    protected $list = false;
+
+    Protected $template = null;
 
     Public function pageModel($context,$alias)
     {
@@ -62,10 +65,12 @@ class PageController extends Controller
 
         $value['page'] = $page;
 
-        if ($page->comments) {
+        if ($page->comments and $this->view_comments) {
             $page->load('comments', 'comments.user');
             $value['comments'] = $page->comments;
         }
+
+        $value['view_comments'] = $this->view_comments;
 
         if ($page->menu) {
             $page->menu->setActiveThis();
@@ -77,7 +82,7 @@ class PageController extends Controller
                     ->where('context', $this->list)
                     ->whereIn('menu_id', $childs)
                     ->sort()
-                    ->with('user','fields')
+                    ->with('user','fields','tag')
                     ->paginate(15);
                 $value['list'] = $list;
             }
