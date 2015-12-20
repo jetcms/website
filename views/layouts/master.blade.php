@@ -45,7 +45,7 @@
 
 </head>
 <body>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 @include('jetweb::widgets.topmenu')
 
@@ -54,7 +54,7 @@
     <div class="row">
       <div class="col-md-2">
         @section('body_left')
-            @include('jetweb::chunk.menu')
+            @include('jetweb::chunk.sidebar')
         @show
       </div>
       <div class="col-md-9">
@@ -73,6 +73,9 @@
         @show
       </div>
       <div class="col-md-1">
+        @section('body_right')
+          @include('jetweb::chunk.share')
+        @show
       </div>
     </div>
   </div>

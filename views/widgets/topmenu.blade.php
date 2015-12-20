@@ -1,14 +1,14 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">Блог веб-разработчика</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Brand</a>
+            <a class="navbar-brand" href="/">Блог веб-разработчика</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -16,6 +16,8 @@
             <ul class="nav navbar-nav">
                 @foreach ($menu as $val)
                     @if (isset($menu_map[$val->id]))
+
+                        {{--
                         <li class="dropdown @if ($val->is_active ) active @endif">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">{{$val->lable}} <span class="caret"></span></a>
                             <ul class="dropdown-menu" aria-labelledby="themes">
@@ -23,6 +25,11 @@
                                     <li @if ($val->is_active ) class="active" @endif><a href="{{$val->url}}">{{$val->lable}}</a></li>
                                 @endforeach
                             </ul>
+                        </li>
+                        --}}
+
+                        <li @if ($val->is_active ) class="active" @endif>
+                            <a href="{{$val->url}}">{{$val->lable}}</a>
                         </li>
                     @else
                         <li @if ($val->is_active ) class="active" @endif>

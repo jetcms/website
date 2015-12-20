@@ -1,41 +1,78 @@
 @if (isset($comments))
-    @foreach ($comments as $val)
-        <a name="comment-{{$val->id}}" class="comment-margin-top"></a>
-        <div class="media">
-            <div class="pull-left">
-                <a href="/profile/{{$val->user->id}}">
+
+    @foreach ($comments as $key=>$val)
+        @if (isset($val->user))
+            <a name="comment-{{$key+1}}" class="comment-margin-top"></a>
+            <div class="media">
+                <div class="pull-left">
+                    <a href="/profile/{{$val->user->id}}">
+                        <img
+                                class="media-object img-circle avatar-menu"
+                                src="/{{image_thumb_fit($val->user->avatar,80,80)}}"
+                                alt="{{$val->user->name}}">
+
+                    </a>
+                    <a href="{{Request::url()}}#comment-{{$key+1}}">
+                        <small>#comment-{{$key+1}}</small>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <p>{!! $val->content !!}</p>
+                    <hr />
+                    <h5 class="media-heading"> <small>{{$val->user->name}} | добавлено
+                            {{$val->updated_at->diffForHumans()}}</small></h5>
+                    @if(Auth::check())
+                        @if(Auth::user()->id != $val->user->id)
+                            <a href="{{Request::url()}}?reply={{$val->id}}#view-comment-form">Ответить</a>
+                        @endif
+                        @if(Auth::user()->id == $val->user->id)
+                            <a href="{{url('comment/remove')}}/{{$val->id}}">Удалить</a>
+                        @endif
+                    @endif
+                    @if ($val->reply_id)
+                        <small class="pull-right">ответ на <a
+                                    href="#comment-{{$val->reply_id}}">comment-{{$val->reply_id}}</a></small>
+                    @endif
+
+                </div>
+
+            </div>
+
+            <hr/>
+        @else
+
+            <a name="comment-{{$key+1}}" class="comment-margin-top"></a>
+            <div class="media">
+                <div class="pull-left">
+
                     <img
-                            class="media-object"
-                            src="/{{image_thumb_fit($val->user->avatar,80,80)}}"
-                            alt="{{$val->user->name}}">
+                        class="media-object img-circle avatar-menu"
+                        src="/{{image_thumb_fit('img/avatar.png',80,80)}}"
+                        alt="Удален">
 
-                </a>
-                <a href="{{Request::url()}}#comment-{{$val->id}}">
-                    <small>#comment-{{$val->id}}</small>
-                </a>
-            </div>
-            <div class="media-body">
-                <p>{!! $val->content !!}</p>
-                <hr />
-                <h5 class="media-heading"> <small>{{$val->user->name}} | {{$val->updated_at->diffForHumans()}}</small></h5>
-                @if(Auth::check())
-                    @if(Auth::user()->id != $val->user->id)
-                    <a href="{{Request::url()}}?reply={{$val->id}}#view-comment-form">Ответить</a>
+                    <a href="{{Request::url()}}#comment-{{$key+1}}">
+                        <small>#comment-{{$key+1}}</small>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <p>{!! $val->content !!}</p>
+                    <hr />
+                    <h5 class="media-heading"> <small>Пользователь удален | добавлено
+                            {{$val->updated_at->diffForHumans()
+                    }}</small></h5>
+
+                    @if ($val->reply_id)
+                        <small class="pull-right">ответ на <a
+                                    href="#comment-{{$val->reply_id}}">comment-{{$val->reply_id}}</a></small>
                     @endif
-                    @if(Auth::user()->id == $val->user->id)
-                        <a href="{{url('comment/remove')}}/{{$val->id}}">Удалить</a>
-                    @endif
-                @endif
-                @if ($val->reply_id)
-                    <small class="pull-right">ответ на <a
-                                href="#comment-{{$val->reply_id}}">comment-{{$val->reply_id}}</a></small>
-                @endif
+
+                </div>
 
             </div>
 
-        </div>
+            <hr/>
 
-        <hr/>
+        @endif
     @endforeach
 
 @endif
@@ -57,6 +94,9 @@
     <input name="_token" type="hidden" value="{{csrf_token()}}">
     <input name="page_id" type="hidden" value="{{$page->id}}">
     <input name="url" type="hidden" value="{{Request::url()}}">
-
-    <button type="submit" class="btn btn-success">Коментировать</button>
+    @if (Auth::check())
+        <button type="submit" class="btn btn-success">Коментировать</button>
+    @else
+        <a  href="/auth/login" class="btn btn-success">Коментировать</a>
+    @endif
 </form>
