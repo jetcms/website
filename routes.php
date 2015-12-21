@@ -5,6 +5,8 @@ Route::controllers([
 	'password' => '\App\Http\Controllers\Auth\PasswordController',
 ]);
 
+
+
 Route::get('form/{name}', '\App\Http\Controllers\MailController@getMailController');
 Route::post('form/{name}', '\App\Http\Controllers\MailController@postMailController');
 Route::any('form/{name}/success', '\App\Http\Controllers\MailController@anySuccess');
