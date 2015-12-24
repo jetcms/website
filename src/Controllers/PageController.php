@@ -2,6 +2,7 @@
 
 use Cache;
 use HTMLMin;
+use Request;
 
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -42,9 +43,19 @@ class PageController extends Controller
     {
         if (view()->exists($tpl))
         {
-            return view($tpl, $value);
+            $html = view($tpl, $value);
         }else{
-            return view($this->defaultTplPage, $value);
+            $html = view($this->defaultTplPage, $value);
+        }
+
+        if (Request::ajax()){
+            if(preg_match('/(?:.)*<body[^>]?>(.*)<\/body[^>]?>(?:.)*/is',$html,$matches)){
+                return $matches[1];
+            }else{
+                return 'error';
+            }
+        }else{
+            return $html;
         }
     }
 

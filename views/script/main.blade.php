@@ -14,7 +14,6 @@
                     this.href = 'http://' + sh + '/away?url=' + this.href;
                 }
             }
-
             return true;
         });
     });
