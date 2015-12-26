@@ -89,6 +89,10 @@
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/js/all.js"></script>
 
+  <link rel="stylesheet" href="/bower_components/img-mac-style/img-mac-style.css">
+  <script src="/bower_components/img-mac-style/img-mac-style.js"></script>
+
+
   @section('footer_script')
   @show
 
