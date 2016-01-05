@@ -4,6 +4,8 @@ use Cache;
 use HTMLMin;
 use Request;
 
+use SEO;
+
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Page;
@@ -22,10 +24,12 @@ class PageController extends Controller
         if (is_array($alias)){
             $page = Page::where('context',$context)
                 ->whereIn('alias', $alias)
+                ->where('active', true)
                 ->first();
         }else{
             $page = Page::where('context',$context)
                 ->where('alias', $alias)
+                ->where('active', true)
                 ->first();
         }
 
@@ -74,6 +78,11 @@ class PageController extends Controller
         $menuLevel = [];
         $page = $this->pageModel($context,$alias);
 
+        SEO::setTitle($page->title);
+        SEO::setDescription($page->description);
+        if ($page->image) {
+            SEO::addImages(asset($page->image));
+        }
         $value['page'] = $page;
 
         if ($page->comments and $this->view_comments) {
@@ -108,9 +117,6 @@ class PageController extends Controller
         }else{
             $view = $this->view('tpl.'.$page->template, $value);
         }
-
-        return html_minify($view);
-
-        return preg_replace('/\r\n|\r|\n/u', '', $view);
+        return $view;
     }
 }

@@ -14,8 +14,8 @@
         </div>
 
         <div class="col-md-8 bg-page">
-            @section('body_content')
-                [пусто]
+        	@section('body_content')
+            	{!! $content or ''!!}
             @show
         </div>
 

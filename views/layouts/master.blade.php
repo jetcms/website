@@ -31,7 +31,7 @@
     <link rel="image_src" href="{{$page->url or ''}}{{$page->image or ''}}" />
   @show
 
-  <link href="/css/app.css" rel="stylesheet">
+  <link href="{{elixir('css/app.css')}}" rel="stylesheet">
 
   @section('head')
   @show
@@ -45,8 +45,6 @@
 
 </head>
 <body>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
 @include('jetweb::widgets.topmenu')
 
   @section('body')
@@ -83,11 +81,7 @@
 
   @include('jetweb::widgets.footer')
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="/js/all.js"></script>
+  <script src="{{elixir('js/all.js')}}"></script>
 
   <link rel="stylesheet" href="/bower_components/img-mac-style/img-mac-style.css">
   <script src="/bower_components/img-mac-style/img-mac-style.js"></script>

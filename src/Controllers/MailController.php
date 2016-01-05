@@ -62,7 +62,7 @@ class MailController extends Controller {
 
     public function anySuccess($name)
     {
-        return view(config('jetcms.form.'.$name.'.layouts','form.layouts.master'),[
+        return view(config('jetcms.form.'.$name.'.layouts','jetweb::form.layouts.master'),[
             'content'=>view(config('jetcms.form.'.$name.'.success_tpl','form.success.default'))
         ]);
     }

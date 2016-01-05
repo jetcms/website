@@ -14,7 +14,6 @@
         </div>
 
         <div class="col-md-4 col-md-offset-1 text-left social">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
             <p class="h3 text-danger">Мы в соцсетях:</p>
 
             <a class="h1 text-danger" href="https://vk.com/studyon.guru"><i class="fa fa-vk"></i></a>

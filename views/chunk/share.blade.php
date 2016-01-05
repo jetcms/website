@@ -12,32 +12,16 @@
     )();
 </script>
 
-<div class="pluso-affix">
-    <div class="pluso hidden-xs" data-background="#ebebeb" data-options="medium,square,line,vertical,counter,
+<div class="pluso-affix hidden-xs hidden-sm">
+    <div class="pluso" data-background="#ebebeb" data-options="medium,square,line,vertical,counter,
                     theme=04" data-services="vkontakte,odnoklassniki,facebook,twitter,google,moimir"></div>
 </div>
-<br class="visible-xs">
-<div class="pluso visible-xs pluso-mobil"
-      data-background="#ebebeb" style="text-align: center"
-     data-options="medium,square,line,horizontal,counter,
-                    theme=04" data-services="vkontakte,odnoklassniki,facebook,twitter,google,moimir"></div>
-<br class="visible-xs">
-@section('setting')
-    <style>
-        .affix-top {
-            margin-top: 10px;
-        }
-        .affix {
-            position: fixed;
-            top: 10px;
-        }
-    </style>
 
-    @section('footer_script')
-        <script>
-            $('.pluso-affix').affix({
-                offset: 156
-            })
-        </script>
-    @stop
-@show
+<div class="visible-xs visible-sm text-center">
+    <br>
+    <div class="pluso pluso-mobil"
+          data-background="#ebebeb" style="text-align: center"
+         data-options="medium,square,line,horizontal,counter,
+                        theme=04" data-services="vkontakte,odnoklassniki,facebook,twitter,google,moimir"></div>
+    <br >
+</div>

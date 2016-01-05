@@ -27,7 +27,6 @@ if (!function_exists('image_thumb_fit')) {
 
     function image_thumb_resize_canvas($nameFile,$w,$h = null, $position= 'center',$color = 'fff')
     {
-
         if ( !is_file( public_path($nameFile) ) ) return null;
         if (!is_dir(public_path('thumb'))) {
             mkdir(public_path('thumb'));
@@ -35,13 +34,13 @@ if (!function_exists('image_thumb_fit')) {
 
         $pathFile = 'thumb/t'.md5($nameFile).'('.$h.'-'.$w.'-'.$position.'-'.$color.').png';
         if (!file_exists(public_path($pathFile))){
-        Image::make(public_path($nameFile))
-            ->resize($w, $h, function ($constraint) {
-                $constraint->aspectRatio();
-            })
-            ->resizeCanvas($w, $h,$position,false,$color)
-            ->encode('png', 95)
-            ->save(public_path($pathFile),100);
+            Image::make(public_path($nameFile))
+                ->resize($w, $h, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->resizeCanvas($w, $h,$position,false,$color)
+                ->encode('png', 95)
+                ->save(public_path($pathFile),100);
         }
         return $pathFile;
 
@@ -49,8 +48,8 @@ if (!function_exists('image_thumb_fit')) {
 
     function html_minify($view)
     {
-        return $view;
+        //return $view;
         return preg_replace(array('/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s'), array(''), $view);
-        return gzencode($view);
+        //return gzencode($view);
     }
 }

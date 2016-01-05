@@ -1,6 +1,7 @@
 <?php namespace JetCMS\Website\Controllers;
 
 use App;
+use Config;
 use App\Page;
 use App\Sitemap;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,11 @@ class SitemapController extends Controller {
 
     protected $default_freq = 'weekly';
     protected $default_priority = '0.50';
+
+    Public function __construct(){
+        $this->default_freq = Config::get('sitemap.freq',$this->default_freq);
+        $this->default_priority = Config::get('sitemap.priority',$this->default_priority);
+    }
 
     Public function anyGenerate () {
         $sitemap = App::make("sitemap");
@@ -25,6 +31,10 @@ class SitemapController extends Controller {
                     'modified' => $modified,
                     'freq' => $sm->changefreq
                 ];
+
+                if (!$sm->in_sitemap){
+                    unset($arr[$sm->loc]);
+                }
             }
         }
 
