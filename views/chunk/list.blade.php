@@ -6,23 +6,25 @@
                     @if(!empty($val->content))
                         <a href="{{$val->url}}" title="{{$val->title}}">
                             <img style="width: 100%;max-width: 250px;"
-                                 data-src="/{{image_thumb_resize_canvas($val->image,250,250)}}"
-                                 src="/{{image_thumb_resize_canvas($val->image,250,250)}}"
+                                 data-src="/{{image_thumb_fit($val->image,250,200)}}"
+                                 src="/{{image_thumb_fit($val->image,250,200)}}"
                                  alt="{{$val->title}}"
-                                 class="img-rounded">
+                                 class="">
                         </a>
                     @else
                         <img style="width: 100%;max-width: 250px;"
-                             data-src="/{{image_thumb_resize_canvas($val->image,250,250)}}"
-                             src="/{{image_thumb_resize_canvas($val->image,250,250)}}"
+                             data-src="/{{image_thumb_fit($val->image,250,200)}}"
+                             src="/{{image_thumb_fit($val->image,250,200)}}"
                              alt="{{$val->title}}"
-                             class="img-rounded">
+                             class="">
                     @endif
                 @endif
             </div>
             <div class="col-md-9">
                 <div class="caption">
-                    <h3>{{$val->title}}</h3>
+                    <a href="{{$val->url}}" title="{{$val->field('title',$val->title)}}">
+                        <h3 style="margin-top: 0px;">{{$val->field('title',$val->title)}}</h3>
+                    </a>
 
                     <p>{!! $val->field('description',$val->description) !!}</p>
                     <hr/>

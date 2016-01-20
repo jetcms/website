@@ -12,24 +12,7 @@
   <meta name="robots" content="noodp"/>
   <meta name="descri" content="noodp"/>
 
-  @section('head_og')
-    <meta property="og:title" content="{{$page->title or 'Главная страница'}}" />
-    <meta property="og:description" content="{{$page->description or 'Главная страница'}}" />
-    <meta property="og:url" content="{{$page->description or '/'}}у" />
-    <meta property="og:image" content="{{$page->url or ''}}{{$page->image or ''}}" />
-  @show
-
-  @section('head_title')
-    <title>{{$page->title or 'Главная страница'}}</title>
-  @show
-
-  @section('head_description')
-    <meta name="description" content="{{$page->description or 'Главная страница'}}">
-  @show
-
-  @section('head_image_src')
-    <link rel="image_src" href="{{$page->url or ''}}{{$page->image or ''}}" />
-  @show
+  {!! SEO::generate() !!}
 
   <link href="{{elixir('css/app.css')}}" rel="stylesheet">
 
@@ -83,14 +66,11 @@
 
   <script src="{{elixir('js/all.js')}}"></script>
 
-  <link rel="stylesheet" href="/bower_components/img-mac-style/img-mac-style.css">
-  <script src="/bower_components/img-mac-style/img-mac-style.js"></script>
-
 
   @section('footer_script')
   @show
 
   @include('jetweb::script.main')
 
-</ibody>
+</body>
 </html>
